@@ -9,6 +9,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/vod/graph/model"
+	"github.com/vod/internal/auth"
 	"go.mongodb.org/mongo-driver/v2/mongo"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -80,7 +81,10 @@ func signup(ctx context.Context, db *mongo.Database, input model.SignupInput) (*
 		return nil, fmt.Errorf("create user: %w", err)
 	}
 
-	token := uuid.NewString()
+	token, err := auth.GenerateSignupToken(userID, username, email)
+	if err != nil {
+		return nil, fmt.Errorf("generate paseto token: %w", err)
+	}
 	return &model.AuthPayload{
 		Token: token,
 		User: &model.PublicUser{

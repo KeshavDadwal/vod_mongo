@@ -47,7 +47,7 @@ func main() {
 		port = defaultPort
 	}
 
-	router := routes.NewGraphQLRouter()
+	router := routes.NewGraphQLRouter(db)
 
 	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
 	log.Fatal(router.Listen(":" + port))

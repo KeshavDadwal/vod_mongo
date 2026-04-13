@@ -2,6 +2,11 @@
 
 package model
 
+type AuthPayload struct {
+	Token string      `json:"token"`
+	User  *PublicUser `json:"user"`
+}
+
 type Mutation struct {
 }
 
@@ -10,7 +15,22 @@ type NewTodo struct {
 	UserID string `json:"userId"`
 }
 
+type PublicUser struct {
+	ID          string  `json:"id"`
+	Username    string  `json:"username"`
+	Email       string  `json:"email"`
+	DisplayName *string `json:"displayName,omitempty"`
+	CreatedAt   string  `json:"createdAt"`
+}
+
 type Query struct {
+}
+
+type SignupInput struct {
+	Username    string  `json:"username"`
+	Email       string  `json:"email"`
+	Password    string  `json:"password"`
+	DisplayName *string `json:"displayName,omitempty"`
 }
 
 type Todo struct {

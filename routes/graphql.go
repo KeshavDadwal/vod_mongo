@@ -10,10 +10,11 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/vektah/gqlparser/v2/ast"
 	"github.com/vod/graph"
+	"go.mongodb.org/mongo-driver/v2/mongo"
 )
 
-func NewGraphQLRouter() *fiber.App {
-	srv := handler.New(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{}}))
+func NewGraphQLRouter(db *mongo.Database) *fiber.App {
+	srv := handler.New(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{DB: db}}))
 	srv.AddTransport(transport.Options{})
 	srv.AddTransport(transport.GET{})
 	srv.AddTransport(transport.POST{})

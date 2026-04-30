@@ -10,11 +10,6 @@ type AuthPayload struct {
 type Mutation struct {
 }
 
-type NewTodo struct {
-	Text   string `json:"text"`
-	UserID string `json:"userId"`
-}
-
 type PublicUser struct {
 	ID          string  `json:"id"`
 	Username    string  `json:"username"`
@@ -26,18 +21,16 @@ type PublicUser struct {
 type Query struct {
 }
 
+type SigninInput struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
+}
+
 type SignupInput struct {
 	Username    string  `json:"username"`
 	Email       string  `json:"email"`
 	Password    string  `json:"password"`
 	DisplayName *string `json:"displayName,omitempty"`
-}
-
-type Todo struct {
-	ID   string `json:"id"`
-	Text string `json:"text"`
-	Done bool   `json:"done"`
-	User *User  `json:"user"`
 }
 
 type User struct {
